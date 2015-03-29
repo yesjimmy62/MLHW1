@@ -1,31 +1,38 @@
 #Cost Function
-#log method
+#Using Cross-Entropy Method
+
 import numpy as np
 import sigmoid
 reload(sigmoid)
 from sigmoid import *
 
-def CostFunction(weight, layer_size, X, y, Lambda):
-    #to do: write checking for weight and layer_size
+# In the CostFunction, (1) Forward Propagation  (2) BackPropagation
+# Need to know the shape of X ---> know the batch size
 
+def CostFunction(weight, layer_size, X, y, Lambda):
+
+    # Write checking for weight and layer_size
     if not isinstance(layer_size, np.ndarray):
         print 'ERROR: In CostFunction.py\nWrong type of weight!\n'
         return
+    # Initializing (1)the Cost (2) Weight_Gradient (3) Number of layer (4) batch size
+    #              (5) a: input of layers (6) z: output of layers
 
-    Cost = 0.
-    #to do... what is the weight's type???
-    #weight_gradient = np.zeros(weight.shape)
+    Cost = 0.     #(1)
     weight_gradient = range(len(weight))
     for i in range(len(weight)):
-        weight_gradient[i] = np.zeros(weight[i].shape)
+        weight_gradient[i] = np.zeros(weight[i].shape)  #(2)
 
-    num_layer = layer_size.size
-    num_bunch = X.shape[0]   #number of data in a bunch
+    num_layer = layer_size.size      #(3)
+    num_bunch = X.shape[0]           #(4)
+
     #Calculate Cost: forward propagation
-    #to do: bunch??, change to adaptive layer number
-    a = range(num_layer)
-    z = range(num_layer)
-    #input layer: a[0]
+
+    a = range(num_layer)  # (5)
+    z = range(num_layer)  # (6)
+
+    # Data input layer: a[0]
+
     a[0] = np.concatenate((np.ones([num_bunch ,1]), X), axis=1)
     z[1] = a[0].dot( weight[0].T)
     a[1] = sigmoid(z[1])
@@ -35,6 +42,7 @@ def CostFunction(weight, layer_size, X, y, Lambda):
     a[2] = sigmoid(z[2])
 
     y_real = np.zeros([num_bunch, layer_size[-1]])
+
     for data_index in range(num_bunch):
         label = int(y[data_index]+0.0001)
         if label is 10:
