@@ -69,6 +69,7 @@ def CostFunction(weight, layer_size, X, y, Lambda):
         weight_gradient[1] += delta_vec[2].dot(a[1][train_i].reshape(1,layer_size[1]+1))
         weight_gradient[0] += delta_vec[1].dot(a[0][train_i].reshape(1,layer_size[0]+1))
 
+
     weight_gradient[0] /= num_bunch
     weight_gradient[1] /= num_bunch
 
@@ -76,6 +77,3 @@ def CostFunction(weight, layer_size, X, y, Lambda):
 
     #return Cost
     return Cost, weight_gradient
-
-
-
