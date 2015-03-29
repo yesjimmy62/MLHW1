@@ -4,7 +4,18 @@ import numpy as np
 
 def sigmoid_function(x):
     return 1.0/(1.0+exp(-x))
-
+    """
+    epsilon = 1E-6
+    if x > 1000.:
+        return 1.-epsilon
+    elif x < 1000.:
+        return 0.+epsilon
+    else:
+        if x > 0:
+            return 1.0/(1.0+exp(-x))-epsilon
+        else:
+            return 1.0/(1.0+exp(-x))+epsilon
+    """
 def sigmoid(z):
     if isinstance(z, list):
         #return list

@@ -20,8 +20,8 @@ import numpy as np
 import sigmoid
 reload(sigmoid)
 from sigmoid import *
-
-def CostFunction(weight, layer_size, X, y, Lambda):
+    
+def CostFunction_SpecialY(weight, layer_size, X, Y, Lambda):
     #to do: write checking for weight and layer_size
     """
     if not isinstance(weight, np.ndarray):
@@ -55,6 +55,8 @@ def CostFunction(weight, layer_size, X, y, Lambda):
     z[2] = a[1].dot(weight[1].T)
     a[2] = sigmoid(z[2])
     
+    #print 'a[0]:'
+    #print a[0][0].reshape(1,layer_size[0]+1)
     """
     print 'a[0][0]'
     print a[0][0]
@@ -63,19 +65,11 @@ def CostFunction(weight, layer_size, X, y, Lambda):
     print 'a[2][0]'
     print a[2][0]
     """
-    
-    
-    #print 'a[0]:'
-    #print a[0][0].reshape(1,layer_size[0]+1)
-    
-    y_real = np.zeros([num_bunch, layer_size[-1]])
     for data_index in range(num_bunch):
-        label = int(y[data_index]+0.0001)
-        if label is 10:
-            label = 0
-        y_real[data_index][label] = 1
         #to do...
-        Cost = Cost - np.log(a[2][data_index]).dot(y_real[data_index])-np.log(1.-a[2][data_index]).dot(1.-y_real[data_index])
+        #print 'np.log:'+str(a[2][data_index])
+        #print ('Y:')+str(Y[data_index])
+        Cost = Cost - np.log(a[2][data_index]).dot(Y[data_index])-np.log(1.-a[2][data_index]).dot(1.-Y[data_index])
     
     Cost = Cost/num_bunch
     
@@ -85,12 +79,7 @@ def CostFunction(weight, layer_size, X, y, Lambda):
     #to do: all in matrix form...?
     delta=range(num_layer)
     delta_vec = range(num_layer)
-    delta[num_layer-1] = a[num_layer-1] - y_real
-    
-    #print a[2]
-    
-    #print 'a[0]:'
-    #print a[0][0].reshape(1,layer_size[0]+1)
+    delta[num_layer-1] = a[num_layer-1] - Y
     
     for train_i in range(num_bunch):
         delta_vec[2] = delta[2][train_i].reshape(delta[2][train_i].size,1)
@@ -99,6 +88,8 @@ def CostFunction(weight, layer_size, X, y, Lambda):
         
         weight_gradient[1] += delta_vec[2].dot(a[1][train_i].reshape(1,layer_size[1]+1))
         weight_gradient[0] += delta_vec[1].dot(a[0][train_i].reshape(1,layer_size[0]+1))
+        #print 'weight1:'+str(weight_gradient[1])
+        #print 'weight0:'+str(weight_gradient[0])
         
         #print 'weight[0][0]:'
         #print weight_gradient[0][0]
@@ -110,17 +101,16 @@ def CostFunction(weight, layer_size, X, y, Lambda):
     print 'a[2][0]'
     print a[2][0]
     print 'Y'
-    print y_real[0]
+    print Y[0]
     print 'delta2'
     print delta_vec[2][0]
     print 'delta1'
     print delta_vec[1][0]
     print 'weight_gradient[0][0]'
     print weight_gradient[0][0]
-    """
     weight_gradient[0] /= num_bunch
     weight_gradient[1] /= num_bunch
-    
+    """
     #to do:regularization
     
     #return Cost
