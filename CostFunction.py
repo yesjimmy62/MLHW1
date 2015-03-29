@@ -23,11 +23,7 @@ from sigmoid import *
 
 def CostFunction(weight, layer_size, X, y, Lambda):
     #to do: write checking for weight and layer_size
-    """
-    if not isinstance(weight, np.ndarray):
-        print 'ERROR: In CostFunction.py\nWrong type of weight!\n'
-        return
-    """
+
     if not isinstance(layer_size, np.ndarray):
         print 'ERROR: In CostFunction.py\nWrong type of weight!\n'
         return
