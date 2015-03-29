@@ -39,7 +39,7 @@ output_layer_size = 48
 print 'loading training data: Start...'
 
 time0 = time.time()
-[dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids] = load_everything(30)
+[dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids] = load_everything(200)
 time1 = time.time()
 print 'loading training data: End...spend '+str(time1-time0)+ 'sec.'
 sys.stdout.flush()
