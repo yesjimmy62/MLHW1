@@ -1,21 +1,5 @@
 #Cost Function
 #log method
-"""
-input:
-    weight:
-        #a 3-dim array
-        weight[level][row][column]
-    layer_size:
-        layer_size[0]: input_layer_size
-        layer_size[-1]:output_layer_size
-    y:
-        1-dimensional vector
-output:
-    Cost:
-        the cost calculated by specific cost function
-    gradient:
-        gradient with respect to weight and bias
-"""
 import numpy as np
 import sigmoid
 reload(sigmoid)
