@@ -19,7 +19,7 @@ from Chris Olah (http://colah.github.io ).
 """
 
 #### Libraries
-import load_everything # our load function
+import load_everything_theano # our load function
 # Standard library
 import cPickle
 import gzip
@@ -52,26 +52,22 @@ else:
     print "Running with a CPU.  If this is not desired, then the modify "+\
         "network3.py to set\nthe GPU flag to True."
 
-#### Load the MNIST data
-def load_data_shared(filename="../data/mnist.pkl.gz"):
+#### Load the data
+def load_data_shared():
     #f = gzip.open(filename, 'rb')
     #training_data, validation_data, test_data = cPickle.load(f)
     #f.close()
-    dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids, validation_features, validation_nums, _validation_ids = load_everything.load_everything(50000,10000) # change the number to get different test data number and validation data number
+    train_features, train_features_ans, validation_features, validation_features_ans, test_features, test_features_ans = load_everything_theano.load_everything(50000,10000,10000) # change the number to get different train, test data number and validation data number
+    training_data = validation_data = test_data = []
+    training_data.append(train_features)
+    training_data.append(train_features_ans)
+    validation_data.append(validation_features)
+    validation_data.append(validation_features_ans)
+    test_data.append(test_features)
+    test_data.append(test_features_ans)
     def shared(data):
-        """Place the data into shared variables.  This allows Theano to copy
-        the data to the GPU, if one is available. """
-        shared_x = theano.shared(
-            np.asarray(data[0], dtype=theano.config.floatX), borrow=True)
-        shared_y = theano.shared(
-            np.asarray(data[1], dtype=theano.config.floatX), borrow=True)
-        return shared_x, T.cast(shared_y, "int32")
-    return [shared(training_data), shared(validation_data), shared(test_data)]
-
-#### Main class used to construct and train networks
-    def shared(data):
-        """Place the data into shared variables.  This allows Theano to copy
-        the data to the GPU, if one is available. """
+        """Place the data into shared variables allowing Theano to copy
+        the data to the GPU"""
         shared_x = theano.shared(
             np.asarray(data[0], dtype=theano.config.floatX), borrow=True)
         shared_y = theano.shared(
@@ -81,7 +77,6 @@ def load_data_shared(filename="../data/mnist.pkl.gz"):
 
 #### Main class used to construct and train networks
 class Network():
-    
     def __init__(self, layers, mini_batch_size):
         """Takes a list of `layers`, describing the network architecture, and
         a value for the `mini_batch_size` to be used during training
@@ -185,7 +180,6 @@ class Network():
 #### Define layer types
 
 class FullyConnectedLayer():
-
     def __init__(self, n_in, n_out, activation_fn=sigmoid, p_dropout=0.0):
         self.n_in = n_in
         self.n_out = n_out

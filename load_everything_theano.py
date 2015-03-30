@@ -75,8 +75,8 @@ def load_everything(num_data, validation_data, test_data):
         temp = line.strip().split()
         test_features[i] = np.array(map(float,temp[1:100]))
         sys.stdout.flush()
-        test_nums[i,dic_label_num[dic_id_label[temp[0]]]] = 1
-        test_features_ans[i] = dic_label_num[dic_id_label[temp[0]]]
+        # test_nums[i,dic_label_num[dic_id_label[temp[0]]]] = 1
+        # test_features_ans[i] = dic_label_num[dic_id_label[temp[0]]]
         test_ids.append(temp[0])
     test_ark_file.close() 
 
