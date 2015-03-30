@@ -9,6 +9,8 @@ import random
 import Accuracy_SpecialY
 reload(Accuracy_SpecialY)
 from Accuracy_SpecialY import *
+import Output_Weight
+reload(Output_Weight)
 
 """
 this is for special form of Y:
@@ -26,6 +28,9 @@ this is for special form of Y:
 def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,iteration, Bunch_size):
     [row_X, col_X] = X.shape
     #X_Bunch = np.zeros([Bunch_size, col_X])
+    
+    #for output file name
+    outfile = 'weight_'
     
     for ite in range(iteration):
         print 'Iteration '+str(ite)+' GradientDescent...Start...\n'
@@ -45,6 +50,9 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
         #[TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
         #print '   TotalCost:'+str(TotalCost)
         #print '   Accuracy: '+str(TotalAccuracy)
+        if ite%100 is 0:
+            Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite))
+        
         
     [TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
     print '   TotalCost:'+str(TotalCost)
