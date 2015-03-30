@@ -19,24 +19,19 @@ from Chris Olah (http://colah.github.io ).
 """
 
 #### Libraries
-import load_everything_theano # our load function
-# Standard library
-import cPickle
-import gzip
+import theano_load_everything as load # our load function
 
 # Third-party libraries
 import numpy as np
 import theano
 import theano.tensor as T
-from theano.tensor.nnet import conv
-from theano.tensor.nnet import softmax
 from theano.tensor import shared_randomstreams
 from theano.tensor.signal import downsample
 
 # Activation functions for neurons
 def linear(z): return z                   # ???
 def ReLU(z): return T.maximum(0.0, z)     # ???
-from theano.tensor.nnet import sigmoid
+# from theano.tensor.nnet import sigmoid
 from theano.tensor import tanh
 
 
@@ -53,11 +48,9 @@ else:
         "network3.py to set\nthe GPU flag to True."
 
 #### Load the data
-def load_data_shared():
-    #f = gzip.open(filename, 'rb')
-    #training_data, validation_data, test_data = cPickle.load(f)
-    #f.close()
-    train_features, train_features_ans, validation_features, validation_features_ans, test_features, test_features_ans = load_everything_theano.load_everything(50000,10000,10000) # change the number to get different train, test data number and validation data number
+def load_data_shared(train_data_number = 50000,valid_data_number = 10000,test_data_number = 10000):
+    train_features, train_features_ans, validation_features, validation_features_ans, test_features, test_features_ans = load.load_everything(train_data_number,valid_data_number,test_data_number) # change the number to get different train, test data number and validation data number
+
     training_data = validation_data = test_data = []
     training_data.append(train_features)
     training_data.append(train_features_ans)
@@ -65,6 +58,7 @@ def load_data_shared():
     validation_data.append(validation_features_ans)
     test_data.append(test_features)
     test_data.append(test_features_ans)
+
     def shared(data):
         """Place the data into shared variables allowing Theano to copy
         the data to the GPU"""
@@ -81,7 +75,6 @@ class Network():
         """Takes a list of `layers`, describing the network architecture, and
         a value for the `mini_batch_size` to be used during training
         by stochastic gradient descent.
-
         """
         self.layers = layers
         self.mini_batch_size = mini_batch_size
@@ -180,7 +173,7 @@ class Network():
 #### Define layer types
 
 class FullyConnectedLayer():
-    def __init__(self, n_in, n_out, activation_fn=sigmoid, p_dropout=0.0):
+    def __init__(self, n_in, n_out,activation_fn, p_dropout=0.0):
         self.n_in = n_in
         self.n_out = n_out
         self.activation_fn = activation_fn
