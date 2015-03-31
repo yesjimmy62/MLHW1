@@ -10,7 +10,7 @@ dic_id_label['maeb0_si1411_1'] = 'sil'
 def load_everything(target_feature_file, num_data = 99999999):
     #file_read = open('/Users/Esther/MLSD/MLDS_HW1_RELEASE_v1/fbank/train.ark', 'r')
     #file_Y = open('Y_data.txt', 'r')
-    
+
     if num_data > 1124823:
         num_data = 1124823
     all_data = 1124823
@@ -24,14 +24,14 @@ def load_everything(target_feature_file, num_data = 99999999):
     for line in train_file:
         temp = line.strip().split(',')
         dic_id_label[temp[0]]=temp[1]
-    
-    train_file.close()    
-    
-    
+
+    train_file.close()
+
+
     dic_label_num = {}
     dic_num_label = {}
     dic_48_39 = {}
-    
+
     dir_file = open(dir_data+'phones/48_39.map')
     i = 0
     for line in dir_file:
@@ -41,13 +41,13 @@ def load_everything(target_feature_file, num_data = 99999999):
         dic_48_39[temp[0]] = temp[1]
         i+=1
     dir_file.close()
-    
+
     train_features = np.empty([num_data,69])
     train_nums = np.zeros([num_data,48])
     #train_features = np.empty([5000,69])
     #train_nums = np.zeros([5000,48])
     train_ids = []
-    
+
     #fbank: 69 dimension
     #mfcc:  39 dimension
     train_ark_file = open(dir_data+target_feature_file)
@@ -62,36 +62,9 @@ def load_everything(target_feature_file, num_data = 99999999):
         sys.stdout.flush()
         train_nums[i,dic_label_num[dic_id_label[temp[0]]]] = 1
         train_ids.append(temp[0])
-        
+
     train_ark_file.close()
 
 
 
-    return dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids 
-    #X=np.array([])
-    #Y=np.array([])
-        
-"""
-    for line in fileinput.input('/Users/Esther/MLSD/MLDS_HW1_RELEASE_v1/fbank/train.ark'):
-        line_array = line.split()
-        
-        line_array = 
-
-
-    num_x = sum(1 for line in file_X)
-    num_y = sum(1 for line in file_Y)
-    file_Y.seek(0)
-    file_X.seek(0)
-    print num_x
-    print num_y
-
-    num_data = 5000
-    num_feature = 400
-#    print file_Y.read().split()[3]
-    y_str = (file_Y.read().split())
-    X_str = (file_X.read().split())
-    print len(X_str)
-
-    X = np.array([float(X_str[k]) for k in range(num_data*num_feature)]).reshape(num_data, num_feature)
-    Y = np.array([float(y_str[k]) for k in range(num_data)])
- """
+    return dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids

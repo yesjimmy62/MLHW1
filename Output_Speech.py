@@ -71,14 +71,10 @@ def load_everything_1(target_feature_file, num_data = 99999999):
 target_file = 'fbank/test.ark'
 num_data = 180406
 
-#Test
-#target_file = 'fbank/train.ark'
-#num_data = 2
-
 [dic_id_label, dic_label_num, dic_num_label, dic_48_39, test_feature, test_nums, test_ids] = load_everything_1(target_file, num_data)
 
 #weight_file = './Output/weight_TEST'
-weight_file = './Output/weight_14900'
+weight_file = './Output/weight_4000_minute_8.59644608498'
 weight, layer_size = load_weight(weight_file)
 
 num_layer = layer_size.size
