@@ -37,14 +37,12 @@ from theano.tensor import tanh
 #### Constants
 GPU = True
 if GPU:
-    print "Trying to run under a GPU.  If this is not desired, then modify "+\
-        "network3.py\nto set the GPU flag to False."
+    print "Trying to run under a GPU. Modify theano_DNN_class to change the GPU flag"
     try: theano.config.device = 'gpu'
     except: pass # it's already set
     theano.config.floatX = 'float32'
 else:
-    print "Running with a CPU.  If this is not desired, then the modify "+\
-        "network3.py to set\nthe GPU flag to True."
+    print "Running with a CPU. Modify theano_DNN_class to change the GPU flag"
 
 #### Load the data
 def load_data_shared(train_data_number = 50000,valid_data_number = 10000,test_data_number = 10000):
