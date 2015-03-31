@@ -155,7 +155,7 @@ class Network():
                 if (iteration+1) % num_training_batches == 0:
                     validation_accuracy = np.mean(
                         [validate_mb_accuracy(j) for j in xrange(num_validation_batches)])
-                    print("Epoch {0}: validation accuracy {1:.2%}".format(
+                    print("Epoch {0}:\nvalidation accuracy {1:.2%}".format(
                         epoch, validation_accuracy))
                     if validation_accuracy >= best_validation_accuracy:
                         print("This is the best validation accuracy to date.")
