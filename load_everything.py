@@ -7,7 +7,7 @@ import fileinput
 dic_id_label['maeb0_si1411_1'] = 'sil'
 
 """
-def load_everything(num_data = 99999999):
+def load_everything(target_feature_file, num_data = 99999999):
     #file_read = open('/Users/Esther/MLSD/MLDS_HW1_RELEASE_v1/fbank/train.ark', 'r')
     #file_Y = open('Y_data.txt', 'r')
     
@@ -50,7 +50,7 @@ def load_everything(num_data = 99999999):
     
     #fbank: 69 dimension
     #mfcc:  39 dimension
-    train_ark_file = open(dir_data+'fbank/train.ark')
+    train_ark_file = open(dir_data+target_feature_file)
     for i in range(num_data):
     #for line in fileinput.input(dir_data+'fbank/5000.ark'):
         line = train_ark_file.readline()

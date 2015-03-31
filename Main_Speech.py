@@ -39,7 +39,9 @@ output_layer_size = 48
 print 'loading training data: Start...'
 
 time0 = time.time()
-[dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids] = load_everything(200)
+target_file = 'fbank/train.ark'
+load_data = 2
+[dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids] = load_everything(target_file, load_data)
 time1 = time.time()
 print 'loading training data: End...spend '+str(time1-time0)+ 'sec.'
 sys.stdout.flush()
@@ -51,8 +53,8 @@ weight[1] = ParameterInitialization(hidden_layer_size+1, output_layer_size)
 layer_size = np.array([input_layer_size, hidden_layer_size, output_layer_size])
 
 learning_rate = 0.1
-iteration = 10
-Bunch_size = 5
+iteration = 30
+Bunch_size = 2
 #final_weight = GradientDescent(X, Y, weight, layer_size, learning_rate,iteration)
 final_weight = GradientDescent_Bunch_SpecialY(train_features, train_nums, weight, layer_size, learning_rate, iteration, Bunch_size)
 

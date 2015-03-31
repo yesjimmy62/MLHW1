@@ -50,7 +50,7 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
         #[TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
         #print '   TotalCost:'+str(TotalCost)
         #print '   Accuracy: '+str(TotalAccuracy)
-        if ite%100 is 0:
+        if ite%29 is 0:
             Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite))
         
         
