@@ -7,9 +7,7 @@ Supports several layer types (fully connected, convolutional, max
 pooling, softmax), and activation functions (sigmoid, tanh, and
 rectified linear units, with more easily added).
 
-In particular, the API is similar to network2.py.  Note that I have
-focused on making the code simple, easily readable, and easily
-modifiable.  It is not optimized, and omits many desirable features.
+In particular, the API is similar to network2.py.
 
 This program incorporates ideas from the Theano documentation on
 convolutional neural nets (notably, 
