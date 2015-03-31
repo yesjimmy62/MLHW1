@@ -50,19 +50,11 @@ weight[1] = ParameterInitialization(hidden_layer_size+1, output_layer_size)
 
 layer_size = np.array([input_layer_size, hidden_layer_size, output_layer_size])
 
-learning_rate = 0.1
+learning_rate = 0.001
 iteration = 10
-Bunch_size = 5
+Bunch_size = 128
 #final_weight = GradientDescent(X, Y, weight, layer_size, learning_rate,iteration)
 final_weight = GradientDescent_Bunch_SpecialY(train_features, train_nums, weight, layer_size, learning_rate, iteration, Bunch_size)
 
 #Debug_GradientDescent_SpecialY(train_features, train_nums, weight, layer_size)
 
-"""
-learning_rate = 0.9
-momentum = 0.3
-iteration = 150
-Bunch_size = 15
-decay_rate = 0.9999
-final_weight = GradientDescent_Momentum(X, Y, weight, layer_size, learning_rate, decay_rate, momentum,iteration, Bunch_size)
-"""
