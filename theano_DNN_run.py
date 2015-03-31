@@ -5,17 +5,17 @@ from theano_DNN_class import SoftmaxLayer
 from theano_sigmoid import sigmoid
 
 mini_batch_size = 2000
-eta = 0.01
+eta = 0.00001
 layer1_num = 69
 layer2_num= 128
 layer3_num = 48
 epochs = 20
-training_data_num = 800000
-validation_data_num = 200000
-test_data_num = 180000
+training_data_num = 800000 #800000
+validation_data_num = 200000 #200000
+test_data_num = 180000 #180000
 
-
-training_data, validation_data, test_data = load_data_shared(training_data_num, validation_data_num, test_data_num)
+# missing the brackets?
+[training_data, validation_data, test_data] = load_data_shared(training_data_num, validation_data_num, test_data_num)
 
 """
 layer12 = FullyConnectedLayer(69,128,sigmoid)
