@@ -6,7 +6,7 @@ from load_everything import *
 from Accuracy_SpecialY import *
 
 target_file = 'fbank/train.ark'
-load_data = 999999999
+load_data = 1000000
 [dic_id_label, dic_label_num, dic_num_label, dic_48_39,train_features, train_nums, train_ids] = load_everything(target_file, load_data)
 
 

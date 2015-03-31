@@ -71,7 +71,7 @@ def GradientDescent_Adagrad_SpecialY(X, Y, weight, layer_size, learning_rate,ite
     outfile = 'weight_'
     time_start = time.time()
 
-
+    r = 0.
     for ite in range(iteration):
         print 'Iteration '+str(ite)+' GradientDescent...Start...\n'
         bunch_sample = random.sample(range(row_X), Bunch_size)
@@ -87,12 +87,12 @@ def GradientDescent_Adagrad_SpecialY(X, Y, weight, layer_size, learning_rate,ite
         for i in range(len(weight)):
             r += sum(sum(weight_gradient[i]**2))
         for i in range(len(weight)):
-            weight[i] -= learning_rate*weight_gradient[i]/np.sqrt(r)
+            weight[i] -= learning_rate*weight_gradient[i]/(0.0001 + np.sqrt(r))
 
         print 'Iteration '+str(ite)+' GradientDescent...Update weights...End...\n'
         if ite%1000 is 0:
             time_now = time.time()
-            time_minute = (time_now - time_start)/60.
+            time_minute = int((time_now - time_start)/60.)
             Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite)+'_minute_'+str(time_minute))
 
 
