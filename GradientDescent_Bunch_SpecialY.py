@@ -32,7 +32,7 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
 
     #for output file name
     outfile = 'weight_'
-    start_time = time.time()
+    time_start = time.time()
     for ite in range(iteration):
         print 'Iteration '+str(ite)+' GradientDescent...Start...\n'
         bunch_sample = random.sample(range(row_X), Bunch_size)

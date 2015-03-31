@@ -5,25 +5,13 @@ import time
 import sys
 import load_everything
 import ParameterInitialization
-import CostFunction
-import GradientDescent
 import GradientDescent_Bunch_SpecialY
-import GradientDescent_Momentum
-import Debug_GradientDescent
 reload(load_everything)
 reload(ParameterInitialization)
-reload(CostFunction)
-reload(GradientDescent)
 reload(GradientDescent_Bunch_SpecialY)
-reload(GradientDescent_Momentum)
-reload(Debug_GradientDescent)
 from ParameterInitialization import *
-from CostFunction import *
-from GradientDescent import *
 from GradientDescent_Bunch_SpecialY import *
-from GradientDescent_Momentum import *
 from load_everything import *
-from Debug_GradientDescent import *
 #reload (load_HandWriting)
 #reload(load_HandWriting.load_HandWriting())
 
