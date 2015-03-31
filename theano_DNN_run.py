@@ -27,6 +27,7 @@ layer_list = []
 layer_list.append(layer12)
 layer_list.append(layer23)
 
+
 # make a class
 DNN1 = Network(layer_list,mini_batch_size)
 DNN1.SGD(training_data, epochs, mini_batch_size, eta, validation_data, test_data)
