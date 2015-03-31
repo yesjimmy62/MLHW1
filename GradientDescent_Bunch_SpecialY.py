@@ -6,6 +6,7 @@ reload(CostFunction_SpecialY)
 from CostFunction_SpecialY import *
 import numpy as np
 import random
+import time
 import Accuracy_SpecialY
 reload(Accuracy_SpecialY)
 from Accuracy_SpecialY import *
@@ -31,7 +32,7 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
 
     #for output file name
     outfile = 'weight_'
-
+    start_time = time.time()
     for ite in range(iteration):
         print 'Iteration '+str(ite)+' GradientDescent...Start...\n'
         bunch_sample = random.sample(range(row_X), Bunch_size)
@@ -44,17 +45,14 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
         print 'Iteration '+str(ite)+' GradientDescent...End...\n'
         print 'Iteration '+str(ite)+' GradientDescent...Update weights...Start...\n'
 
-        k = Cost*learning_rate
         for i in range(len(weight)):
-            weight[i] -= learning_rate*weight_gradient[i];
+            weight[i] -= learning_rate*weight_gradient[i]
 
         print 'Iteration '+str(ite)+' GradientDescent...Update weights...End...\n'
-        #print 'gradient:'+str(weight_gradient[0])
-        #[TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
-        #print '   TotalCost:'+str(TotalCost)
-        #print '   Accuracy: '+str(TotalAccuracy)
-        if ite%29 is 0:
-            Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite))
+        if ite%1000 is 0:
+            time_now = time.time()
+            time_minute = (time_now - time_start)/60.
+            Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite)+'_minute_'+str(time_minute))
 
 
     [TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
