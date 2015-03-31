@@ -23,15 +23,15 @@ this is for special form of Y:
           ...
           ]
     Actually, it may save some time in CostFunction.py
-    because in original CostFuction.py, we need to transform Y into this form 
+    because in original CostFuction.py, we need to transform Y into this form
 """
 def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,iteration, Bunch_size):
     [row_X, col_X] = X.shape
     #X_Bunch = np.zeros([Bunch_size, col_X])
-    
+
     #for output file name
     outfile = 'weight_'
-    
+
     for ite in range(iteration):
         print 'Iteration '+str(ite)+' GradientDescent...Start...\n'
         bunch_sample = random.sample(range(row_X), Bunch_size)
@@ -43,8 +43,11 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
         print '   SampleCost:'+str(Cost)
         print 'Iteration '+str(ite)+' GradientDescent...End...\n'
         print 'Iteration '+str(ite)+' GradientDescent...Update weights...Start...\n'
+
+        k = Cost*learning_rate
         for i in range(len(weight)):
             weight[i] -= learning_rate*weight_gradient[i];
+
         print 'Iteration '+str(ite)+' GradientDescent...Update weights...End...\n'
         #print 'gradient:'+str(weight_gradient[0])
         #[TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
@@ -52,8 +55,8 @@ def GradientDescent_Bunch_SpecialY(X, Y, weight, layer_size, learning_rate,itera
         #print '   Accuracy: '+str(TotalAccuracy)
         if ite%100 is 0:
             Output_Weight.Output_Weight(weight, layer_size, outfile+str(ite))
-        
-        
+
+
     [TotalCost, TotalAccuracy] = Accuracy_SpecialY(weight, layer_size, X, Y, 1)
     print '   TotalCost:'+str(TotalCost)
     print '   Accuracy: '+str(TotalAccuracy)
